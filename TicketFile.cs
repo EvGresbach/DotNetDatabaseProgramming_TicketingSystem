@@ -8,7 +8,8 @@ class TicketFile{
 
     //Constructor to reads from file
     public TicketFile(string file){
-        StreamReader sr = new StreamReader(file); 
+        StreamReader sr = new StreamReader(file);
+
         while(!sr.EndOfStream){
             string line = sr.ReadLine(); 
             string[] ticket = line.Split(","); 
@@ -26,7 +27,28 @@ class TicketFile{
                 tempTicket.watching.Add(s); 
             }
         }
+
+        sr.Close(); 
     }
     //Method to write to file
-    //Method to get unique id
+    public void AddTicket(Ticket ticket){
+        StreamWriter sw = new StreamWriter(file, true);
+        sw.WriteLine($"{ticket.id},{ticket.summary},{ticket.status},{ticket.priority},{ticket.submitter},{ticket.assigned},{String.Join("|", ticket.watching)}");
+        sw.Close(); 
+
+        //update Ticket list 
+        Tickets.Add(ticket); 
+    }
+
+    //Method to ensure unique id
+    public bool IsUnique(int id){
+        bool repeat = false; 
+        
+        foreach(Ticket ticket in Tickets){
+            if (id == ticket.id)
+                repeat = true; 
+        }
+
+        return repeat; 
+    }
 }
