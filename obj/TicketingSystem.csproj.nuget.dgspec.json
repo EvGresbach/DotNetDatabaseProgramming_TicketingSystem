@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\evxin\\OneDrive\\Desktop\\WCTC\\Spring 2021\\dotNet\\Module1\\TicketingSystem\\TicketingSystem.csproj": {}
+    "C:\\Users\\evxin\\OneDrive\\Desktop\\WCTC\\Spring 2021\\dotNet\\Class1\\TicketingSystem\\TicketingSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\evxin\\OneDrive\\Desktop\\WCTC\\Spring 2021\\dotNet\\Module1\\TicketingSystem\\TicketingSystem.csproj": {
+    "C:\\Users\\evxin\\OneDrive\\Desktop\\WCTC\\Spring 2021\\dotNet\\Class1\\TicketingSystem\\TicketingSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\evxin\\OneDrive\\Desktop\\WCTC\\Spring 2021\\dotNet\\Module1\\TicketingSystem\\TicketingSystem.csproj",
+        "projectUniqueName": "C:\\Users\\evxin\\OneDrive\\Desktop\\WCTC\\Spring 2021\\dotNet\\Class1\\TicketingSystem\\TicketingSystem.csproj",
         "projectName": "TicketingSystem",
-        "projectPath": "C:\\Users\\evxin\\OneDrive\\Desktop\\WCTC\\Spring 2021\\dotNet\\Module1\\TicketingSystem\\TicketingSystem.csproj",
+        "projectPath": "C:\\Users\\evxin\\OneDrive\\Desktop\\WCTC\\Spring 2021\\dotNet\\Class1\\TicketingSystem\\TicketingSystem.csproj",
         "packagesPath": "C:\\Users\\evxin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\evxin\\OneDrive\\Desktop\\WCTC\\Spring 2021\\dotNet\\Module1\\TicketingSystem\\obj\\",
+        "outputPath": "C:\\Users\\evxin\\OneDrive\\Desktop\\WCTC\\Spring 2021\\dotNet\\Class1\\TicketingSystem\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\evxin\\AppData\\Roaming\\NuGet\\NuGet.Config"
