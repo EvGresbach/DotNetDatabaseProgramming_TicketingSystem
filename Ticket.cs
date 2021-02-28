@@ -8,6 +8,6 @@ class Ticket{
     public string priority {get; set;}
     public string submitter {get; set;}
     public string assigned {get; set;}
-    List<string> watching {get; set;} 
+    public List<string> watching {get; set;} 
 
 }
