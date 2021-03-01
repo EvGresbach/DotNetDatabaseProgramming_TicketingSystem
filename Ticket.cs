@@ -10,4 +10,18 @@ class Ticket{
     public string assigned {get; set;}
     public List<string> watching {get; set;} 
 
+    //constructor
+    public Ticket(int id, string summary, string status, string priority, string submitter, string assigned, List<String> watching){
+        this.id = id; 
+        this.summary = summary; 
+        this.status = status; 
+        this.priority = priority; 
+        this.submitter = submitter; 
+        this.assigned = assigned; 
+        this.watching = watching; 
+    }
+    //method to print 
+    public override string ToString(){
+        return String.Format($"Ticket {id}:\nSummary: {summary}\nPriority: {priority}\nSubmitter: {submitter}\nAssigned: {assigned}\nWatching: {String.Join(", ", watching)}"); 
+    }
 }
