@@ -48,6 +48,10 @@ namespace TicketingSystem
                     int ticketID; 
                     if(!Int32.TryParse(Console.ReadLine(), out ticketID)){
                         Console.Write("ID must be an integer. Please try again: ");
+                    } 
+                    if(!ticketFile.IsUnique(ticketID)){
+                        logger.Info("Invalid ID " + ticketID);  
+                        break; 
                     }
                     Console.Write("Enter Summary: "); 
                     string summary = Console.ReadLine(); 

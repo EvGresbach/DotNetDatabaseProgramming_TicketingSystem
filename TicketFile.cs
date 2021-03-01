@@ -57,11 +57,14 @@ class TicketFile{
 
     //Method to ensure unique id
     public bool IsUnique(int id){
-        bool repeat = false; 
+        bool repeat = true; 
         
         foreach(Ticket ticket in Tickets){
             if (id == ticket.id)
-                repeat = true; 
+            {
+                Console.WriteLine($"Invalid ID. Next avaiable ID {Tickets[Tickets.Count-1].id + 1}"); 
+                repeat = false; 
+            }
         }
 
         return repeat; 
