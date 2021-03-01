@@ -8,6 +8,8 @@ class TicketFile{
 
     //Constructor to reads from file
     public TicketFile(string file){
+        this.file = file; 
+        Tickets = new List<Ticket>(); 
         StreamReader sr = new StreamReader(file);
 
         while(!sr.EndOfStream){
@@ -26,6 +28,8 @@ class TicketFile{
             foreach(string s in watchers){
                 tempTicket.watching.Add(s); 
             }
+
+            Tickets.Add(tempTicket); 
         }
 
         sr.Close(); 

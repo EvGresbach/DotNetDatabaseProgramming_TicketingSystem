@@ -8,7 +8,8 @@ namespace TicketingSystem
     {
         static void Main(string[] args)
         {
-            string file = "Tickets.csv";
+            // string file = "Tickets.csv";
+            TicketFile ticketFile = new TicketFile("Tickets.csv"); 
             string userChoice; 
             do {
                 Console.WriteLine("1. Read data from file\n2. Add data to file \nEnter any key to exit");
@@ -16,30 +17,36 @@ namespace TicketingSystem
                 // choice 1 - read data
                 if (userChoice == "1")
                 {
-                    if (File.Exists(file))
-                    {
-                        StreamReader sr = new StreamReader(file);
-                        
-                        while (!sr.EndOfStream)
-                        {
-                            string line = sr.ReadLine();
-                            string[] ticket = line.Split(',');
-                            string[] watcher = ticket[6].Split('|');
-                            Console.WriteLine($"Ticket {ticket[0]} \n----------------------------");
-                            Console.WriteLine($"Summary: {ticket[1]}\nStatus: {ticket[2]} \nPriority: {ticket[3]}\n"
-                                + $"Submitter: {ticket[4]} \nAssigned: {ticket[5]} \nWatching: {String.Join(", ", watcher)}\n\n");
-                        }
-                        sr.Close(); 
+                    foreach(Ticket t in ticketFile.Tickets){
+                        Console.WriteLine(t + "\n"); 
                     }
-                    else Console.WriteLine("This file does not exist");
+                    // if (File.Exists(file))
+                    // {
+                    //     StreamReader sr = new StreamReader(file);
+                        
+                    //     while (!sr.EndOfStream)
+                    //     {
+                    //         string line = sr.ReadLine();
+                    //         string[] ticket = line.Split(',');
+                    //         string[] watcher = ticket[6].Split('|');
+                    //         Console.WriteLine($"Ticket {ticket[0]} \n----------------------------");
+                    //         Console.WriteLine($"Summary: {ticket[1]}\nStatus: {ticket[2]} \nPriority: {ticket[3]}\n"
+                    //             + $"Submitter: {ticket[4]} \nAssigned: {ticket[5]} \nWatching: {String.Join(", ", watcher)}\n\n");
+                    //     }
+                    //     sr.Close(); 
+                    // }
+                    // else Console.WriteLine("This file does not exist");
                 }
                 // choice 2 - add data
                 else if (userChoice == "2")
                 {
-                    StreamWriter sw = new StreamWriter(file);
+                    // StreamWriter sw = new StreamWriter(file);
 
                     Console.Write("Enter Ticket ID: "); 
-                    string ticketID = Console.ReadLine(); 
+                    int ticketID; 
+                    if(!Int32.TryParse(Console.ReadLine(), out ticketID)){
+                        Console.Write("ID must be an integer. Please try again: ");
+                    }
                     Console.Write("Enter Summary: "); 
                     string summary = Console.ReadLine(); 
                     Console.Write("Enter Status: "); 
@@ -61,9 +68,11 @@ namespace TicketingSystem
                         Console.Write("Enter another person watching? Y/N: ");
                         moreWatching = Console.ReadLine().ToUpper(); 
                     } while(moreWatching == "Y");
+                    Ticket ticket = new Ticket(ticketID, summary, status, priority, submitter, assigned, watching); 
+                    // sw.WriteLine($"{ticketID},{summary},{status},{priority},{submitter},{assigned},{String.Join("|", watching)}"); 
+                    // sw.Close();
 
-                    sw.WriteLine($"{ticketID},{summary},{status},{priority},{submitter},{assigned},{String.Join("|", watching)}"); 
-                    sw.Close();
+                    ticketFile.AddTicket(ticket); 
                 }
             } while (userChoice == "1" || userChoice == "2");
         }

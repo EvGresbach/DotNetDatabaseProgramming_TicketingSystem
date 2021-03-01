@@ -20,6 +20,11 @@ class Ticket{
         this.assigned = assigned; 
         this.watching = watching; 
     }
+
+    public Ticket(){
+        watching = new List<string>(); 
+    }
+
     //method to print 
     public override string ToString(){
         return String.Format($"Ticket {id}:\nSummary: {summary}\nPriority: {priority}\nSubmitter: {submitter}\nAssigned: {assigned}\nWatching: {String.Join(", ", watching)}"); 
