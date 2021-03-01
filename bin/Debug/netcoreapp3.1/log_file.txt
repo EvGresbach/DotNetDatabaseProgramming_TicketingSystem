@@ -1,0 +1,4 @@
+2021-02-28 19:48:00.0851|ERROR|TicketFile|Input string was not in a correct format.
+2021-02-28 19:48:36.1399|ERROR|TicketFile|The process cannot access the file 'C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\Tickets.csv' because it is being used by another process.
+2021-02-28 19:50:51.2049|ERROR|TicketFile|Input string was not in a correct format.
+2021-02-28 19:53:58.3128|INFO|TicketFile|2,Open,Lo,Low,Jane,Jack,Kevin|Sue entered

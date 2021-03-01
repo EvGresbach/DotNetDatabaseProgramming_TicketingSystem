@@ -1,13 +1,15 @@
 ﻿using System;
 using System.IO; 
 using System.Collections.Generic;
-
+using NLog.Web; 
 namespace TicketingSystem
 {
     class Program
     {
         static void Main(string[] args)
         {
+            NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
+    
             // string file = "Tickets.csv";
             TicketFile ticketFile = new TicketFile("Tickets.csv"); 
             string userChoice; 

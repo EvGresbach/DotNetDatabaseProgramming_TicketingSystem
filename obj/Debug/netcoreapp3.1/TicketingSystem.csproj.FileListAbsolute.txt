@@ -37,3 +37,7 @@ C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\o
 C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\obj\Debug\netcoreapp3.1\TicketingSystem.dll
 C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\obj\Debug\netcoreapp3.1\TicketingSystem.pdb
 C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\obj\Debug\netcoreapp3.1\TicketingSystem.genruntimeconfig.cache
+C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\bin\Debug\netcoreapp3.1\NLog.dll
+C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\bin\Debug\netcoreapp3.1\NLog.Extensions.Logging.dll
+C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\bin\Debug\netcoreapp3.1\NLog.Web.AspNetCore.dll
+C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\obj\Debug\netcoreapp3.1\TicketingSystem.csproj.CopyComplete
