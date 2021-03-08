@@ -120,18 +120,18 @@ namespace TicketingSystem{
             
         }
         //Method to write to file
-        public void AddTicket(Ticket ticket){
-            try{
-                StreamWriter sw = new StreamWriter(file, true);
-                sw.WriteLine($"{ticket.id},{ticket.summary},{ticket.status},{ticket.priority},{ticket.submitter},{ticket.assigned},{String.Join("|", ticket.watching)}");
-                sw.Close(); 
-            }catch(Exception e){
-                logger.Error(e.Message);
-            }
-            logger.Info($"{ticket.id},{ticket.summary},{ticket.status},{ticket.priority},{ticket.submitter},{ticket.assigned},{String.Join("|", ticket.watching)} entered"); 
-            //update Ticket list 
-            Tickets.Add(ticket); 
-        }
+        // public void AddTicket(Ticket ticket){
+        //     try{
+        //         StreamWriter sw = new StreamWriter(file, true);
+        //         sw.WriteLine($"{ticket.id},{ticket.summary},{ticket.status},{ticket.priority},{ticket.submitter},{ticket.assigned},{String.Join("|", ticket.watching)}");
+        //         sw.Close(); 
+        //     }catch(Exception e){
+        //         logger.Error(e.Message);
+        //     }
+        //     logger.Info($"{ticket.id},{ticket.summary},{ticket.status},{ticket.priority},{ticket.submitter},{ticket.assigned},{String.Join("|", ticket.watching)} entered"); 
+        //     //update Ticket list 
+        //     Tickets.Add(ticket); 
+        // }
 
         //Method to ensure unique id
         public bool IsUnique(int id){

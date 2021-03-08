@@ -7,3 +7,5 @@
 2021-02-28 20:06:42.3518|ERROR|TicketFile|Input string was not in a correct format.
 2021-02-28 20:07:28.7788|ERROR|TicketFile|Input string was not in a correct format.
 2021-02-28 20:09:48.9662|INFO|TicketingSystem.Program|Invalid ID1
+2021-03-08 13:30:04.7103|ERROR|TicketingSystem.TicketFile|Could not find file 'C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\Tasks.csv'.
+2021-03-08 13:30:39.4670|ERROR|TicketingSystem.TicketFile|Could not find file 'C:\Users\evxin\OneDrive\Desktop\WCTC\Spring 2021\dotNet\Class1\TicketingSystem\Tasks.csv'.
