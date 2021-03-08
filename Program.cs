@@ -9,7 +9,7 @@ namespace TicketingSystem
         static void Main(string[] args)
         {
             NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
-    
+        
             // create ticket files for each type
             TicketFile defects = new TicketFile("Tickets.csv", "Defect"); 
             TicketFile enhancements = new TicketFile("Enhancements.csv", "Enhancement");
@@ -57,7 +57,56 @@ namespace TicketingSystem
                     } 
 
                    //collect information 
+                   //summary, status, priority, submitter, assigned, watching
+                   Console.Write("Enter Summary: "); 
+                   string summary = Console.ReadLine(); 
+                   Console.Write("Enter Status: "); 
+                   string status = Console.ReadLine(); 
+                   Console.Write("Enter Priority: "); 
+                   string priority = Console.ReadLine(); 
+                   Console.Write("Enter Submitter: "); 
+                   string submitter = Console.ReadLine(); 
+                   Console.Write("Enter Assigned: "); 
+                   string assigned = Console.ReadLine();
+
+                   List<string> watchers = new List<string>(); 
+                   string watcher; 
+                   do{
+                       Console.Write("Enter Watching (or done to quit): ");  
+                       watcher = Console.ReadLine(); 
+                       if(!watcher.Equals("done")){
+                           watchers.Add(watcher); 
+                       }
+                    } while(!watcher.Equals("done")); 
+
+                   //defect - id, severity
+                   if(toWrite == 1){
+                       //id
+                       Console.Write("Enter Severity: "); 
+                       string severity = Console.ReadLine(); 
+                   }
+                   //enhancement - id, software, cost, reason, estimate, 
+                   else if(toWrite == 2){
+                       //id 
+                       Console.WriteLine("Enter Software: "); 
+                       string software = Console.ReadLine(); 
+                       Console.Write("Enter Cost: "); 
+                       double cost = Double.Parse(Console.ReadLine()); 
+                       Console.WriteLine("Enter Reason: "); 
+                       string reason = Console.ReadLine(); 
+                       Console.Write("Enter Estimate: "); 
+                       double estimate = Double.Parse(Console.ReadLine()); 
+                   }
+                   //task - id, project name, due date
+                    else if(toWrite == 3){
+                        //id 
+                        Console.Write("Enter Project Name: "); 
+                        string projectName = Console.ReadLine(); 
+                        Console.WriteLine("Enter Due Date (formatting): "); 
+                        DateTime dueDate = DateTime.Parse(Console.ReadLine()); 
+                    }
                    //add ticket to ticketfile list 
+                   
                 }
             } while (userChoice == "1" || userChoice == "2");
         }
