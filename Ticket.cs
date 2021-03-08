@@ -33,15 +33,33 @@ namespace TicketingSystem{
     } 
 
     public class Defect : Ticket {
+        string severity {get; set;}
         
+        public override string Display(){
+            return String.Format($"Ticket {id}:\nSummary: {summary}\nPriority: {priority}\nSubmitter: {submitter}\nAssigned: {assigned}\nWatching: {String.Join(", ", watching)}\nSeverity {severity}"); 
+        }
     }
 
     public class Enhancement : Ticket {
+        string software {get; set;}
+        double cost {get; set;}
+        string reason {get; set;}
+        double estimate {get; set}
 
+        public override string Display()
+        {
+            return base.Display() + String.Format($"\nSoftware: {software}\nCost: {cost:c.2}\nReason: {reason}\nEstimate: {estimate:c.2}");
+        }
     }
 
     public class Task : Ticket {
+        string projectName {get; set; }
+        DateTime dueDate {get; set; }
 
+        public override string Display()
+        {
+            return base.Display() + String.Format($"\nProject Name: {projectName}\nDue Date: {dueDate:dd/mm}");
+        }
     }
 }
 
