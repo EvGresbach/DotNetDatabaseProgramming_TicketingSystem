@@ -5,42 +5,119 @@ using NLog.Web;
 
 namespace TicketingSystem{
     class TicketFile{
-        public string file {get; set;}
+        public string defectFile {get; set;}
+        public string enhancementFile {get; set;}
+        public string taskFile{get; set;}
         public List<Ticket> Tickets {get; set;}
         
         public NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
 
         //Constructor to reads from file
-        public TicketFile(string file){
-            this.file = file; 
+        public TicketFile(string file, string type){
             Tickets = new List<Ticket>(); 
-            try{
-                StreamReader sr = new StreamReader(file);
 
-                while(!sr.EndOfStream){
-                    string line = sr.ReadLine(); 
-                    string[] ticket = line.Split(","); 
-                    Ticket tempTicket = new Ticket();
+            //switch for each type of ticket
+            switch(type){
+                case "Defect":
+                    try{
+                        StreamReader sr = new StreamReader(file);
+                        
 
-                    tempTicket.id = Int32.Parse(ticket[0]); 
-                    tempTicket.summary = ticket[1]; 
-                    tempTicket.status = ticket[2];
-                    tempTicket.priority = ticket[3];
-                    tempTicket.submitter = ticket[4];
-                    tempTicket.assigned = ticket[5];
+                        while(!sr.EndOfStream){
+                            string line = sr.ReadLine(); 
+                            string[] ticket = line.Split(","); 
+                            Defect defect = new Defect();
 
-                    string[] watchers = ticket[6].Split("|");
-                    foreach(string s in watchers){
-                        tempTicket.watching.Add(s); 
+                            defect.id = Int32.Parse(ticket[0]); 
+                            defect.summary = ticket[1]; 
+                            defect.status = ticket[2];
+                            defect.priority = ticket[3];
+                            defect.submitter = ticket[4];
+                            defect.assigned = ticket[5];
+                            defect.severity = ticket[7]; 
+
+                            string[] watchers = ticket[6].Split("|");
+                            foreach(string s in watchers){
+                                defect.watching.Add(s); 
+                            }
+
+                            Tickets.Add(defect); 
+                        }
+
+                        sr.Close(); 
+                    } catch(Exception e){
+                        logger.Error(e.Message); 
                     }
+                     
+                    break; 
+                case "Enhancement":
+                    try{
+                        StreamReader sr = new StreamReader(file);
+                        
 
-                    Tickets.Add(tempTicket); 
-                }
+                        while(!sr.EndOfStream){
+                            string line = sr.ReadLine(); 
+                            string[] ticket = line.Split(","); 
+                            Enhancement enhancement = new Enhancement(); 
 
-                sr.Close(); 
-            } catch(Exception e){
-                logger.Error(e.Message); 
+                            enhancement.id = Int32.Parse(ticket[0]); 
+                            enhancement.summary = ticket[1]; 
+                            enhancement.status = ticket[2];
+                            enhancement.priority = ticket[3];
+                            enhancement.submitter = ticket[4];
+                            enhancement.assigned = ticket[5];
+                            enhancement.software = ticket[7]; 
+                            enhancement.cost = Double.Parse(ticket[8]); 
+                            enhancement.reason = ticket[9];
+                            enhancement.estimate = Double.Parse(ticket[10]); 
+
+                            string[] watchers = ticket[6].Split("|");
+                            foreach(string s in watchers){
+                                enhancement.watching.Add(s); 
+                            }
+
+                            Tickets.Add(enhancement); 
+                        }
+
+                        sr.Close(); 
+                    } catch(Exception e){
+                        logger.Error(e.Message); 
+                    } 
+                    break;
+                case "Task":
+                    try{
+                        StreamReader sr = new StreamReader(file);
+                        
+
+                        while(!sr.EndOfStream){
+                            string line = sr.ReadLine(); 
+                            string[] ticket = line.Split(","); 
+                            Task task = new Task(); 
+
+                            task.id = Int32.Parse(ticket[0]); 
+                            task.summary = ticket[1]; 
+                            task.status = ticket[2];
+                            task.priority = ticket[3];
+                            task.submitter = ticket[4];
+                            task.assigned = ticket[5];
+                            task.projectName = ticket[7]; 
+                            task.dueDate = DateTime.Parse(ticket[8]); 
+
+                            string[] watchers = ticket[6].Split("|");
+                            foreach(string s in watchers){
+                                task.watching.Add(s); 
+                            }
+
+                            Tickets.Add(task); 
+                        }
+
+                        sr.Close(); 
+                    } catch(Exception e){
+                        logger.Error(e.Message); 
+                    } 
+                    break; 
             }
+            
         }
         //Method to write to file
         public void AddTicket(Ticket ticket){
