@@ -21,7 +21,7 @@ namespace TicketingSystem{
                 case "Defect":
                     try{
                         StreamReader sr = new StreamReader(file);
-                        
+                        defectFile = file; 
 
                         while(!sr.EndOfStream){
                             string line = sr.ReadLine(); 
@@ -53,7 +53,7 @@ namespace TicketingSystem{
                 case "Enhancement":
                     try{
                         StreamReader sr = new StreamReader(file);
-                        
+                        enhancementFile = file; 
 
                         while(!sr.EndOfStream){
                             string line = sr.ReadLine(); 
@@ -87,7 +87,7 @@ namespace TicketingSystem{
                 case "Task":
                     try{
                         StreamReader sr = new StreamReader(file);
-                        
+                        taskFile = file; 
 
                         while(!sr.EndOfStream){
                             string line = sr.ReadLine(); 
@@ -120,32 +120,58 @@ namespace TicketingSystem{
             
         }
         //Method to write to file
-        // public void AddTicket(Ticket ticket){
-        //     try{
-        //         StreamWriter sw = new StreamWriter(file, true);
-        //         sw.WriteLine($"{ticket.id},{ticket.summary},{ticket.status},{ticket.priority},{ticket.submitter},{ticket.assigned},{String.Join("|", ticket.watching)}");
-        //         sw.Close(); 
-        //     }catch(Exception e){
-        //         logger.Error(e.Message);
-        //     }
-        //     logger.Info($"{ticket.id},{ticket.summary},{ticket.status},{ticket.priority},{ticket.submitter},{ticket.assigned},{String.Join("|", ticket.watching)} entered"); 
-        //     //update Ticket list 
-        //     Tickets.Add(ticket); 
-        // }
+        public void AddTicket(Ticket ticket, int type){
+            if(type == 1){
+                Defect defect = (Defect)ticket;
+                try{
+                    StreamWriter sw = new StreamWriter(defectFile, true);
+                    sw.WriteLine($"{defect.id},{defect.summary},{defect.status},{defect.priority},{defect.submitter},{defect.assigned},{String.Join("|", defect.watching)},{defect.severity}");
+                    sw.Close(); 
+                }catch(Exception e){
+                    logger.Error(e.Message);
+                }
+                logger.Info($"Defect {defect.id} entered"); 
+            }
+            else if (type == 2){
+                Enhancement en =(Enhancement)ticket; 
+                try{
+                    StreamWriter sw = new StreamWriter(file, true);
+                    sw.WriteLine($"{en.id},{en.summary},{en.status},{en.priority},{en.submitter},{en.assigned},{String.Join("|", en.watching)},{en.software},{en.cost},{en.reason},{en.estimate}");
+                    sw.Close(); 
+                }catch(Exception e){
+                    logger.Error(e.Message);
+                }
+                logger.Info($"Enhancement {en.id} entered"); 
+            }
+            else if (type == 3){
+                Task task = (Task)ticket; 
+                try{
+                    StreamWriter sw = new StreamWriter(file, true);
+                    sw.WriteLine($"{task.id},{task.summary},{task.status},{task.priority},{task.submitter},{task.assigned},{String.Join("|", task.watching)},{task.projectName},{task.dueDate}");
+                    sw.Close(); 
+                }catch(Exception e){
+                    logger.Error(e.Message);
+                }
+                logger.Info($"Task {task.id} entered"); 
+            }
+            
+            //update Ticket list 
+            Tickets.Add(ticket); 
+        }
 
         //Method to ensure unique id
-        public bool IsUnique(int id){
-            bool repeat = true; 
+        // public bool IsUnique(int id){
+        //     bool repeat = true; 
             
-            foreach(Ticket ticket in Tickets){
-                if (id == ticket.id)
-                {
-                    Console.WriteLine($"Invalid ID. Next avaiable ID {Tickets[Tickets.Count-1].id + 1}"); 
-                    repeat = false; 
-                }
-            }
+        //     foreach(Ticket ticket in Tickets){
+        //         if (id == ticket.id)
+        //         {
+        //             Console.WriteLine($"Invalid ID. Next avaiable ID {Tickets[Tickets.Count-1].id + 1}"); 
+        //             repeat = false; 
+        //         }
+        //     }
 
-            return repeat; 
-        }
+        //     return repeat; 
+        // }
     }
 }
