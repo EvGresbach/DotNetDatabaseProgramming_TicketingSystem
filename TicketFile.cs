@@ -135,7 +135,7 @@ namespace TicketingSystem{
             else if (type == 2){
                 Enhancement en =(Enhancement)ticket; 
                 try{
-                    StreamWriter sw = new StreamWriter(file, true);
+                    StreamWriter sw = new StreamWriter(enhancementFile, true);
                     sw.WriteLine($"{en.id},{en.summary},{en.status},{en.priority},{en.submitter},{en.assigned},{String.Join("|", en.watching)},{en.software},{en.cost},{en.reason},{en.estimate}");
                     sw.Close(); 
                 }catch(Exception e){
@@ -146,7 +146,7 @@ namespace TicketingSystem{
             else if (type == 3){
                 Task task = (Task)ticket; 
                 try{
-                    StreamWriter sw = new StreamWriter(file, true);
+                    StreamWriter sw = new StreamWriter(taskFile, true);
                     sw.WriteLine($"{task.id},{task.summary},{task.status},{task.priority},{task.submitter},{task.assigned},{String.Join("|", task.watching)},{task.projectName},{task.dueDate}");
                     sw.Close(); 
                 }catch(Exception e){
@@ -159,6 +159,9 @@ namespace TicketingSystem{
             Tickets.Add(ticket); 
         }
 
+        public int getNewID(){
+            return Tickets[Tickets.Count - 1].id + 1; 
+        }
         //Method to ensure unique id
         // public bool IsUnique(int id){
         //     bool repeat = true; 
