@@ -9,7 +9,9 @@ namespace TicketingSystem
         static void Main(string[] args)
         {
             NLog.Logger logger = NLog.Web.NLogBuilder.ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
-        
+
+            logger.Info("Program Started");
+
             // create ticket files for each type
             TicketFile defects = new TicketFile("Tickets.csv", "Defect"); 
             TicketFile enhancements = new TicketFile("Enhancements.csv", "Enhancement");
@@ -34,16 +36,22 @@ namespace TicketingSystem
                         foreach(Defect defect in defects.Tickets){
                             Console.WriteLine("\n" + defect.Display()); 
                         }
+
+                        logger.Info("Defects Displayed"); 
                     }
                     else if(readFrom == 2){
                         foreach(Enhancement en in enhancements.Tickets){
                             Console.WriteLine("\n" + en.Display()); 
                         }
+
+                        logger.Info("Enhancements Displayed"); 
                     }
                     else if(readFrom == 3){
                         foreach(Task task in tasks.Tickets){
                             Console.WriteLine("\n" + task.Display()); 
                         }
+
+                        logger.Info("Tasks Displayed"); 
                     }
                 }
                 // choice 2 - add data
@@ -103,11 +111,11 @@ namespace TicketingSystem
                        Enhancement en = new Enhancement();
                        //add id, software, cost, reason, estimate
                        en.id = enhancements.getNewID(); 
-                       Console.WriteLine("Enter Software: "); 
+                       Console.Write("Enter Software: "); 
                        en.software = Console.ReadLine(); 
                        Console.Write("Enter Cost: "); 
                        en.cost = Double.Parse(Console.ReadLine()); 
-                       Console.WriteLine("Enter Reason: "); 
+                       Console.Write("Enter Reason: "); 
                        en.reason = Console.ReadLine(); 
                        Console.Write("Enter Estimate: "); 
                        en.estimate = Double.Parse(Console.ReadLine()); 
@@ -129,10 +137,11 @@ namespace TicketingSystem
                         task.id = tasks.getNewID(); 
                         Console.Write("Enter Project Name: "); 
                         task.projectName = Console.ReadLine(); 
-                        Console.WriteLine("Enter Due Date (mm/dd/yyyy): "); 
+                        Console.Write("Enter Due Date (mm/dd/yyyy): "); 
                         DateTime dueDate; 
-                        if(!DateTime.TryParse(Console.ReadLine(), out dueDate)){
-                            Console.WriteLine("Invalid date. Please try again (mm/dd/yyyy): ");
+                        while(!DateTime.TryParse(Console.ReadLine(), out dueDate)){
+                            logger.Info("Invalid date");
+                            Console.Write("Plese enter date(mm/dd/yyyy): ");
                         }
                         task.dueDate = dueDate; 
 
@@ -144,10 +153,12 @@ namespace TicketingSystem
                         task.assigned = assigned; 
                         task.watching = watchers; 
 
-                        enhancements.AddTicket(task, toWrite);
+                        tasks.AddTicket(task, toWrite);
                     }
                 }
             } while (userChoice == "1" || userChoice == "2");
+
+            logger.Info("Program Ended"); 
         }
     }
 }
