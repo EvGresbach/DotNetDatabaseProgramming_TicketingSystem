@@ -24,23 +24,23 @@ namespace TicketingSystem
                 {
                     //ask what file to read from 
                     Console.Write("\nWhich type of ticket do you wish to look at?\n1. Bugs/Defects\n2. Enhancements\n3. Tasks\n>"); 
-                    int toReadFrom; 
-                    while(!Int32.TryParse(Console.ReadLine(), out toReadFrom)){
+                    int readFrom; 
+                    while(!Int32.TryParse(Console.ReadLine(), out readFrom)){
                         Console.Write("\nAnswer must be an integer\n1. Bugs/Defects\n2. Enhancements\n3. Tasks\n>");
                     } 
 
                     //read from that file
-                    if(toReadFrom == 1){
+                    if(readFrom == 1){
                         foreach(Defect defect in defects.Tickets){
                             Console.WriteLine("\n" + defect.Display()); 
                         }
                     }
-                    else if(toReadFrom == 2){
+                    else if(readFrom == 2){
                         foreach(Enhancement en in enhancements.Tickets){
                             Console.WriteLine("\n" + en.Display()); 
                         }
                     }
-                    else if(toReadFrom == 3){
+                    else if(readFrom == 3){
                         foreach(Task task in tasks.Tickets){
                             Console.WriteLine("\n" + task.Display()); 
                         }
@@ -79,34 +79,73 @@ namespace TicketingSystem
                        }
                     } while(!watcher.Equals("done")); 
 
-                   //defect - id, severity
+                   //defect - id, severity, create the new ticket
                    if(toWrite == 1){
-                       //id
+                       //create ticket
+                       Defect defect = new Defect(); 
+                       // add id + severity 
+                       defect.id = defects.getNewID(); 
                        Console.Write("Enter Severity: "); 
-                       string severity = Console.ReadLine(); 
+                       defect.severity = Console.ReadLine(); 
+                       //add everything else
+                       defect.summary = summary; 
+                       defect.status = status; 
+                       defect.priority = priority; 
+                       defect.submitter = submitter; 
+                       defect.assigned = assigned; 
+                       defect.watching = watchers; 
+
+                       defects.AddTicket(defect, toWrite); 
                    }
-                   //enhancement - id, software, cost, reason, estimate, 
+                   //enhancement - id, software, cost, reason, estimate, create the new ticket
                    else if(toWrite == 2){
-                       //id 
+                       //create ticket
+                       Enhancement en = new Enhancement();
+                       //add id, software, cost, reason, estimate
+                       en.id = enhancements.getNewID(); 
                        Console.WriteLine("Enter Software: "); 
-                       string software = Console.ReadLine(); 
+                       en.software = Console.ReadLine(); 
                        Console.Write("Enter Cost: "); 
-                       double cost = Double.Parse(Console.ReadLine()); 
+                       en.cost = Double.Parse(Console.ReadLine()); 
                        Console.WriteLine("Enter Reason: "); 
-                       string reason = Console.ReadLine(); 
+                       en.reason = Console.ReadLine(); 
                        Console.Write("Enter Estimate: "); 
-                       double estimate = Double.Parse(Console.ReadLine()); 
+                       en.estimate = Double.Parse(Console.ReadLine()); 
+                       //add everything else
+                       en.summary = summary; 
+                       en.status = status; 
+                       en.priority = priority; 
+                       en.submitter = submitter; 
+                       en.assigned = assigned; 
+                       en.watching = watchers; 
+
+                       enhancements.AddTicket(en, toWrite);
                    }
-                   //task - id, project name, due date
+                   //task - id, project name, due date, create the new ticket
                     else if(toWrite == 3){
-                        //id 
+                        //create ticket
+                        Task task = new Task(); 
+                        //add id, project name, due date 
+                        task.id = tasks.getNewID(); 
                         Console.Write("Enter Project Name: "); 
-                        string projectName = Console.ReadLine(); 
-                        Console.WriteLine("Enter Due Date (formatting): "); 
-                        DateTime dueDate = DateTime.Parse(Console.ReadLine()); 
+                        task.projectName = Console.ReadLine(); 
+                        Console.WriteLine("Enter Due Date (mm/dd/yyyy): "); 
+                        DateTime dueDate; 
+                        if(!DateTime.TryParse(Console.ReadLine(), out dueDate)){
+                            Console.WriteLine("Invalid date. Please try again (mm/dd/yyyy): ");
+                        }
+                        task.dueDate = dueDate; 
+
+                        //add everything else
+                        task.summary = summary; 
+                        task.status = status; 
+                        task.priority = priority; 
+                        task.submitter = submitter; 
+                        task.assigned = assigned; 
+                        task.watching = watchers; 
+
+                        enhancements.AddTicket(task, toWrite);
                     }
-                   //add ticket to ticketfile list 
-                   
                 }
             } while (userChoice == "1" || userChoice == "2");
         }
