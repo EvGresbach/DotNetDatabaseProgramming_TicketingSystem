@@ -58,7 +58,7 @@ namespace TicketingSystem{
 
         public override string Display()
         {
-            return base.Display() + String.Format($"\nProject Name: {projectName}\nDue Date: {dueDate:dd/mm}");
+            return base.Display() + String.Format($"\nProject Name: {projectName}\nDue Date: {dueDate:MM/dd/yyyy}");
         }
     }
 }

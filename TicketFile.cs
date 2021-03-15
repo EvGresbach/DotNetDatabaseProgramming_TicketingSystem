@@ -101,8 +101,11 @@ namespace TicketingSystem{
                             task.submitter = ticket[4];
                             task.assigned = ticket[5];
                             task.projectName = ticket[7]; 
-                            task.dueDate = DateTime.Parse(ticket[8]); 
-
+                            DateTime dueDate; 
+                            if(!DateTime.TryParse(ticket[8], out dueDate)){
+                                Console.WriteLine("failed");
+                            }; 
+                            task.dueDate = dueDate; 
                             string[] watchers = ticket[6].Split("|");
                             foreach(string s in watchers){
                                 task.watching.Add(s); 
@@ -127,10 +130,10 @@ namespace TicketingSystem{
                     StreamWriter sw = new StreamWriter(defectFile, true);
                     sw.WriteLine($"{defect.id},{defect.summary},{defect.status},{defect.priority},{defect.submitter},{defect.assigned},{String.Join("|", defect.watching)},{defect.severity}");
                     sw.Close(); 
+                    logger.Info($"Defect {defect.id} entered"); 
                 }catch(Exception e){
                     logger.Error(e.Message);
                 }
-                logger.Info($"Defect {defect.id} entered"); 
             }
             else if (type == 2){
                 Enhancement en =(Enhancement)ticket; 
@@ -138,10 +141,10 @@ namespace TicketingSystem{
                     StreamWriter sw = new StreamWriter(enhancementFile, true);
                     sw.WriteLine($"{en.id},{en.summary},{en.status},{en.priority},{en.submitter},{en.assigned},{String.Join("|", en.watching)},{en.software},{en.cost},{en.reason},{en.estimate}");
                     sw.Close(); 
+                    logger.Info($"Enhancement {en.id} entered"); 
                 }catch(Exception e){
                     logger.Error(e.Message);
                 }
-                logger.Info($"Enhancement {en.id} entered"); 
             }
             else if (type == 3){
                 Task task = (Task)ticket; 
@@ -149,10 +152,10 @@ namespace TicketingSystem{
                     StreamWriter sw = new StreamWriter(taskFile, true);
                     sw.WriteLine($"{task.id},{task.summary},{task.status},{task.priority},{task.submitter},{task.assigned},{String.Join("|", task.watching)},{task.projectName},{task.dueDate}");
                     sw.Close(); 
+                    logger.Info($"Task {task.id} entered"); 
                 }catch(Exception e){
                     logger.Error(e.Message);
                 }
-                logger.Info($"Task {task.id} entered"); 
             }
             
             //update Ticket list 
