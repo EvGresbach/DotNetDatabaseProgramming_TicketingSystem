@@ -20,7 +20,7 @@ namespace TicketingSystem
 
             string userChoice; 
             do {
-                Console.Write("\n1. Read data from file\n2. Add data to file 3. Search for ticket\nEnter any key to exit\n>");
+                Console.Write("\n1. Read data from file\n2. Add data to file\n3. Search for ticket\nEnter any key to exit\n>");
                 userChoice = Console.ReadLine(); 
                 // choice 1 - read data
                 if (userChoice == "1")
@@ -166,8 +166,27 @@ namespace TicketingSystem
                     Console.Write("Search For\n>");
                     string searchTerm = Console.ReadLine(); 
                     //search
-                    
+                    List<Ticket> ticketsBySearch = new List<Ticket>(); 
+                    switch(searchBy){
+                        case 1: 
+                        //status
+                            ticketsBySearch.AddRange(defects.Tickets.Where(t => t.status.Equals(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList());
+                            ticketsBySearch.AddRange(enhancements.Tickets.Where(t => t.status.Equals(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList());
+                            ticketsBySearch.AddRange(tasks.Tickets.Where(t => t.status.Equals(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList()); 
+                            break; 
+                        case 2: 
+                        //priority
+                            break ;
+                        case 3: 
+                        //submitter
+                            break;
+                    }
                     //result
+                    logger.Info($"{ticketsBySearch.Count()} tickets with {searchTerm} search term");
+                    Console.Write($"The {ticketsBySearch.Count()} tickets with {searchTerm} search term:");
+                    foreach(Ticket ticket in ticketsBySearch){
+                        Console.WriteLine("\n" + ticket.Display()); 
+                    } 
                 }
             } while (userChoice == "1" || userChoice == "2" || userChoice == "3");
 

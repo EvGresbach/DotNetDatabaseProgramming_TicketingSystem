@@ -28,7 +28,7 @@ namespace TicketingSystem{
 
         //method to print 
         public virtual string Display(){
-            return String.Format($"Ticket {id}:\nSummary: {summary}\nPriority: {priority}\nSubmitter: {submitter}\nAssigned: {assigned}\nWatching: {String.Join(", ", watching)}"); 
+            return String.Format($"Ticket ID #{id}:\nSummary: {summary}\nPriority: {priority}\nSubmitter: {submitter}\nAssigned: {assigned}\nWatching: {String.Join(", ", watching)}"); 
         }
     } 
 
