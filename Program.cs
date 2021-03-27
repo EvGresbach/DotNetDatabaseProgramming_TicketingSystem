@@ -170,20 +170,26 @@ namespace TicketingSystem
                     switch(searchBy){
                         case 1: 
                         //status
-                            ticketsBySearch.AddRange(defects.Tickets.Where(t => t.status.Equals(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList());
-                            ticketsBySearch.AddRange(enhancements.Tickets.Where(t => t.status.Equals(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList());
-                            ticketsBySearch.AddRange(tasks.Tickets.Where(t => t.status.Equals(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList()); 
+                            ticketsBySearch.AddRange(defects.Tickets.Where(t => t.status.Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+                            .Concat(enhancements.Tickets.Where(t => t.status.Equals(searchTerm, StringComparison.OrdinalIgnoreCase)))
+                            .Concat(tasks.Tickets.Where(t => t.status.Equals(searchTerm, StringComparison.OrdinalIgnoreCase))).ToList());
                             break; 
                         case 2: 
                         //priority
+                            ticketsBySearch.AddRange(defects.Tickets.Where(t => t.priority.Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+                            .Concat(enhancements.Tickets.Where(t => t.priority.Equals(searchTerm, StringComparison.OrdinalIgnoreCase)))
+                            .Concat(tasks.Tickets.Where(t => t.priority.Equals(searchTerm, StringComparison.OrdinalIgnoreCase))).ToList()); 
                             break ;
                         case 3: 
                         //submitter
+                            ticketsBySearch.AddRange(defects.Tickets.Where(t => t.submitter.Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+                            .Concat(enhancements.Tickets.Where(t => t.submitter.Equals(searchTerm, StringComparison.OrdinalIgnoreCase)))
+                            .Concat(tasks.Tickets.Where(t => t.submitter.Equals(searchTerm, StringComparison.OrdinalIgnoreCase))).ToList()); 
                             break;
                     }
                     //result
-                    logger.Info($"{ticketsBySearch.Count()} tickets with {searchTerm} search term");
-                    Console.Write($"The {ticketsBySearch.Count()} tickets with {searchTerm} search term:");
+                    logger.Info($"{ticketsBySearch.Count()} tickets with \"{searchTerm}\" search term");
+                    Console.Write($"The {ticketsBySearch.Count()} tickets with \"{searchTerm}\" search term:");
                     foreach(Ticket ticket in ticketsBySearch){
                         Console.WriteLine("\n" + ticket.Display()); 
                     } 
