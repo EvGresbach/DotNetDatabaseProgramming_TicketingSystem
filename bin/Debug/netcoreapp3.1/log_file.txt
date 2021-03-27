@@ -16,3 +16,8 @@
 2021-03-15 12:40:06.4383|INFO|TicketingSystem.TicketFile|Task 2 entered
 2021-03-15 12:41:06.7077|INFO|TicketingSystem.TicketFile|Task 3 entered
 2021-03-15 12:42:57.7747|INFO|TicketingSystem.TicketFile|Task 3 entered
+2021-03-15 12:52:26.8361|INFO|TicketingSystem.Program|Program Started
+2021-03-15 12:52:33.4371|INFO|TicketingSystem.Program|Defects Displayed
+2021-03-15 12:52:36.1912|INFO|TicketingSystem.Program|Enhancements Displayed
+2021-03-15 12:52:37.7460|INFO|TicketingSystem.Program|Tasks Displayed
+2021-03-15 12:52:52.1194|INFO|TicketingSystem.Program|Program Ended

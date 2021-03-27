@@ -2,6 +2,7 @@
 using System.IO; 
 using System.Collections.Generic;
 using NLog.Web; 
+using System.Linq; 
 namespace TicketingSystem
 {
     class Program
@@ -19,7 +20,7 @@ namespace TicketingSystem
 
             string userChoice; 
             do {
-                Console.Write("\n1. Read data from file\n2. Add data to file \nEnter any key to exit\n>");
+                Console.Write("\n1. Read data from file\n2. Add data to file 3. Search for ticket\nEnter any key to exit\n>");
                 userChoice = Console.ReadLine(); 
                 // choice 1 - read data
                 if (userChoice == "1")
@@ -156,7 +157,19 @@ namespace TicketingSystem
                         tasks.AddTicket(task, toWrite);
                     }
                 }
-            } while (userChoice == "1" || userChoice == "2");
+                else if (userChoice == "3"){
+                    //status, priority, or submitter
+                    Console.Write("Search by:\n1. Status\n2. Priority\n3. Submitter\n>"); 
+                    int searchBy; 
+                    Int32.TryParse(Console.ReadLine(), out searchBy);
+                    //search term
+                    Console.Write("Search For\n>");
+                    string searchTerm = Console.ReadLine(); 
+                    //search
+                    
+                    //result
+                }
+            } while (userChoice == "1" || userChoice == "2" || userChoice == "3");
 
             logger.Info("Program Ended"); 
         }
